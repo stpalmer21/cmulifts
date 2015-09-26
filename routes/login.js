@@ -5,7 +5,6 @@ var User = db.schemas.User;
 
 /* GET login page. */
 router.get('/', function(req, res, next) {
-
   res.render('login', {
     title: 'CMU Lifts',
   });
@@ -13,15 +12,15 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   User.find({
-    id: req.params.userId
+    id: req.body.userId
   }, function (err, users) {
     if (err) {
-      console.error();(err);
+      console.error(err);
       return res.send(500);
     }
 
     if (users.length > 0) {
-      req.session.userId = req.params.id;
+      req.session.userId = req.body.userId;
       req.session.loggedIn = true;
       res.redirect('/search/');
     } else {
@@ -30,16 +29,7 @@ router.post('/', function(req, res, next) {
         notFound: true,
       });
     }
-  })
+  });
 });
 
-
-
-router.post('/')
-
 module.exports = router;
-
-//
-// router.post('/', function(req, res, next) {
-//     res.redirect('/')
-// });
