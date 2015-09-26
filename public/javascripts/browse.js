@@ -13,8 +13,8 @@ function showNextUser() {
     displayUser(users[0]);
   }
   else {
-    $('#user').fadeOut('fast');
-    $('#waiting').fadeIn('fast');
+    $('#user').fadeOut(500);
+    $('#waiting').delay(500).fadeIn(500);
   }
 }
 
