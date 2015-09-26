@@ -9,7 +9,6 @@ html
     script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js" type="text/javascript")
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript")
   body
-    span= loggedIn
     nav.navbar.navbar-inverse
       .container-fluid
         .navbar-header
@@ -35,6 +34,8 @@ html
                 li
                     a(href='/login') Login
             - else
+              li
+                  a(href='/my-account') My Account
               li
                   a(href='/logout') Logout
     block content
