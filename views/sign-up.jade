@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  .container
+    .well.bs-component
+      form.form-horizontal
+        fieldset
+          legend Sign up for CMU Lifts
+          .form-group
+            label.col-lg-2.control-label(for='andrewID') Andrew ID
+            .col-lg-10
+              input#inputEmail.form-control(type='text', placeholder='Andrew ID')
+          .form-group
+            label.col-lg-2.control-label(for='inputPassword') Password
+            .col-lg-10
+              input#inputPassword.form-control(type='password', placeholder='*********')
+          .form-group
+            label.col-lg-2.control-label(for='age') Age
+            .col-lg-10
+              input#inputPassword.form-control(type='text', placeholder='19')
+          .form-group
+            label.col-lg-2.control-label(for='gender') Gender
+            .col-lg-10
+              select#select.form-control
+                option Female
+                option Male
+                option Other
+          .form-group
+            .col-lg-10.col-lg-offset-2
+              button.btn.btn-primary(type='submit') Sign up!
