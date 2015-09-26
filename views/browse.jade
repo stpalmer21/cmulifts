@@ -21,21 +21,19 @@ block content
         span ?
       div#profile-image-wrapper
         img#profile-image
-      table.info-table
-        tr
-          td
-            b Gender: 
-            span#gender
-          td
-            b Experience: 
-            span#experience
-        tr
-          td
-            b Activity: 
-            span#workoutType
-          td
-            b Time: 
-            span#workoutTime
+      .row.info-table
+        .col-xs-6
+          b Gender: 
+          span#gender
+        .col-xs-6
+          b Experience: 
+          span#experience
+        .col-xs-6
+          b Activity: 
+          span#workoutType
+        .col-xs-6
+          b Time: 
+          span#workoutTime
       br
       a.btn.btn-default.pull-left(href="/exitQueue") &laquo; Back
       .btn-group.pull-right
