@@ -1,8 +1,4 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/');
-
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
 
 var userSchema = mongoose.Schema({
   name: {
@@ -54,27 +50,6 @@ var userSchema = mongoose.Schema({
   }
 });
 
-var responseSchema = mongoose.Schema({
-  from: {
-    type: String,
-    required: true
-  },
-  to: {
-    type: String,
-    required: true
-  },
-  affirmative: {
-    type: Boolean,
-    required: true
-  }
-});
-
 var User = mongoose.model('User', userSchema);
-var Response = mongoose.model('Response', responseSchema);
 
-db.schemas = {
-  User: User,
-  Response: Response
-};
-
-module.exports = db;
+module.exports = User;
