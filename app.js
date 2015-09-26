@@ -12,6 +12,9 @@ var users = require('./routes/users');
 var login = require('./routes/login');
 var signup = require('./routes/sign-up');
 
+var db = require('./database');
+var User = db.schemas.User;
+
 var app = express();
 
 // view engine setup
@@ -27,13 +30,34 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'WOOHO!' }));
 
+app.use(function(req, res, next) {
+  if(req.session.loggedIn) {
+    User.find({id: req.session.userId}, function(err, users) {
+      if(err) {
+        console.log(err);
+        res.send(500);
+      }
+
+      if(users.length === 0) {
+        req.session.loggedIn = false;
+        res.redirect('/login');
+      }
+      else {
+        req.user = users[0];
+      }
+
+      next();
+    });
+  } else {
+    next();
+  }
+});
+
 app.use('/', routes);
 app.use('/ajax', ajax);
 app.use('/users', users);
 app.use('/login', login);
 app.use('/sign-up', signup);
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

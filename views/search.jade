@@ -1,10 +1,48 @@
 extends layout
 
 block content
-  .jumbotron
-    .container
-      h1= title
-      p
-        | Find a workout buddy and gym in two minutes tops!
-      p
-        a.btn.btn-primary.btn-lg(href="/sign-up") Sign up now!
+  .container
+    p.lead Hello, #{user['name']}. Let's get started.
+    p #{user}
+    form.form-horizontal
+      fieldset
+        legend First, let's find out more who you're looking for!
+        .form-group
+          label.col-lg-2.control-label(for='gender') Their gender
+          .col-lg-10
+            select#select.form-control(required)
+              option(disabled selected) Select an option
+              option(selected=(user.partnerGender === "Female")) Female
+              option(selected=(user.partnerGender === "Male")) Male
+              option(selected=(user.partnerGender === "Other")) Other
+              option(selected=(user.partnerGender === "Any")) Any
+        legend Now, more about you.
+        .form-group
+          label.col-lg-2.control-label(for='experience') How experienced are you?
+          .col-lg-10
+            select#select.form-control(required)
+              option(disabled selected) Select an option
+              option Beginner
+              option Intermediate
+              option Expert
+        .form-group
+          label.col-lg-2.control-label(for='workoutType') What kind of a workout are you looking for?
+          .col-lg-10
+            select#select.form-control(required)
+              option(disabled selected) Select an option
+              option Running
+              option Lifting
+              option Bicycling
+        .form-group
+          label.col-lg-2.control-label(for='workoutTime') When do you want to workout?
+          .col-lg-10
+            select#select.form-control(required)
+              option(disabled selected) Select an option
+              option Now!
+              option In fifteen minutes
+              option In half an hour
+              option In an hour
+              option In a couple of hours
+        .form-group
+          .col-lg-2.col-lg-offset-10.col-xs-5.col-xs-offset-7
+            button.btn.btn-primary(type='submit') Find a partner!

@@ -32,6 +32,25 @@ var userSchema = mongoose.Schema({
     type: String,
     enum: ['Male', 'Female', 'Other'],
     required: true
+  },
+  search_time: {
+    type: Date
+  },
+  partnerGender: {
+    type: String,
+    enum: ['Male', 'Female', 'Other', 'Any']
+  },
+  experience: {
+    type: String,
+    enum: ['Beginner', 'Intermediate', 'Expert']
+  },
+  workoutType: {
+    type: String,
+    enum: ['Running', 'Lifting', 'Bicycling']
+  },
+  workoutTime: {
+    type: String,
+    enum: ['Now', 'In fifteen minutes', 'In half an hour', 'In an hour', 'In a couple of hours']
   }
 });
 
