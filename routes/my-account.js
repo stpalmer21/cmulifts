@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('my-account', {
-    title: 'CMU Lifts',
+    title: 'My Account',
     userId: req.session.userId,
     age: req.session.age,
     gender: req.session.gender,

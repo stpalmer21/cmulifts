@@ -17,7 +17,7 @@ var Response = db.schemas.Response;
 
 function searchPage(req, res, next) {
   return res.render('search', {
-    title: 'CMU Lifts',
+    title: 'Search',
     loggedIn: req.session.loggedIn,
     user: req.user
   });
@@ -25,7 +25,7 @@ function searchPage(req, res, next) {
 
 function homePage(req, res, next) {
   res.render('index', {
-    title: 'CMU Lifts',
+    title: 'Home',
     loggedIn: req.session.loggedIn
   });
 }
@@ -97,7 +97,7 @@ function browsePage(req, res, next) {
       //TODO: better sorting based on criteria including gender, etc.
 
       res.render('browse', {
-        title: 'CMU Lifts',
+        title: 'Browse',
         loggedIn: req.session.loggedIn,
         user: req.user,
         users: filteredUsers

@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('sign-up', {
-    title: 'CMU Lifts',
+    title: 'Sign up',
     path: req.path,
     loggedIn: req.session.loggedIn
   });
