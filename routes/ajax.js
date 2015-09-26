@@ -36,7 +36,8 @@ function saveResponse(affirmative, req, res) {
       affirmative: true
     }, res, function (responses) {
       res.send({
-        mutual: responses.length > 0
+        mutual: responses.length > 0,
+        phone: responses.length > 0 ? user.phone : undefined
       });
     });
   });

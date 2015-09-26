@@ -30,6 +30,7 @@ block content
           .col-lg-10
             select#select.form-control(name="workoutType", required)
               option(disabled selected) Select an option
+              option(selected=(user.workoutType === "Any")) Any
               option(selected=(user.workoutType === "Running")) Running
               option(selected=(user.workoutType === "Lifting")) Lifting
               option(selected=(user.workoutType === "Bicycling")) Bicycling
@@ -38,6 +39,7 @@ block content
           .col-lg-10
             select#select.form-control(name="workoutTime", required)
               option(disabled selected) Select an option
+              option(selected=(user.workoutTime === "Any")) Any
               option(selected=(user.workoutTime === "Now")) Now
               option(selected=(user.workoutTime === "In fifteen minutes")) In fifteen minutes
               option(selected=(user.workoutTime === "In half an hour")) In half an hour

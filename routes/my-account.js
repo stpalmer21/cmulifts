@@ -3,6 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+<<<<<<< HEAD
 
   age = req.user.age;
   gender = req.user.gender;
@@ -15,6 +16,14 @@ function getRender(req, res, next) {
     loggedIn: req.session.loggedIn,
     path: req.path,
     user: req.user,
+=======
+  res.render('my-account', {
+    title: 'My Account',
+    userId: req.session.userId,
+    age: req.session.age,
+    gender: req.session.gender,
+    path: req.path
+>>>>>>> 6b862f3d8c78bd92b1186b59bc4a8fa88180d761
   });
 }
 

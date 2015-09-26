@@ -17,7 +17,7 @@ var Response = db.schemas.Response;
 
 function searchPage(req, res, next) {
   return res.render('search', {
-    title: 'CMU Lifts',
+    title: 'Search',
     loggedIn: req.session.loggedIn,
     user: req.user
   });
@@ -25,7 +25,7 @@ function searchPage(req, res, next) {
 
 function homePage(req, res, next) {
   res.render('index', {
-    title: 'CMU Lifts',
+    title: 'Home',
     loggedIn: req.session.loggedIn
   });
 }
@@ -87,13 +87,17 @@ function browsePage(req, res, next) {
         var acceptedYou = responses.acceptedBy.contains(req.user.id);
         var canRespond = !alreadyResponded && !rejectedYou;
 
-        return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond;
+        var workoutsMatch = req.user.workoutType === 'Any' || user.workoutType === 'Any' || req.user.workoutType === user.workoutType;
+        var experiencesMatch = req.user.experience === user.experience;
+        var workoutTimesMatch = req.user.workoutTime === 'Any' || user.workoutTime === 'Any' || req.user.workoutTime === user.workoutTime;
+
+        return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond && workoutsMatch && experiencesMatch && workoutTimesMatch;
       });
       //TODO: sort with those who accepted you at start
       //TODO: better sorting based on criteria including gender, etc.
 
       res.render('browse', {
-        title: 'CMU Lifts',
+        title: 'Browse',
         loggedIn: req.session.loggedIn,
         user: req.user,
         users: filteredUsers

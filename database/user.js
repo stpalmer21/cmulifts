@@ -29,6 +29,11 @@ var userSchema = mongoose.Schema({
     enum: ['Male', 'Female', 'Other'],
     required: true
   },
+  phone: {
+    type: String,
+    required: true,
+    default: "11234567890"
+  },
   searchTime: {
     type: Date
   },
@@ -42,11 +47,11 @@ var userSchema = mongoose.Schema({
   },
   workoutType: {
     type: String,
-    enum: ['Running', 'Lifting', 'Bicycling']
+    enum: ['Running', 'Lifting', 'Bicycling', 'Any']
   },
   workoutTime: {
     type: String,
-    enum: ['Now', 'In fifteen minutes', 'In half an hour', 'In an hour', 'In a couple of hours']
+    enum: ['Any', 'Now', 'In fifteen minutes', 'In half an hour', 'In an hour', 'In a couple of hours']
   }
 });
 
