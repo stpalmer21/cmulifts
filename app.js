@@ -29,7 +29,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'WOOHO!' }));
+app.use(session({
+  resave: false,
+  saveUninitialized: false,
+  secret: 'WOOHO!'
+}));
 
 app.use(function(req, res, next) {
   if(req.session.loggedIn && req.session.userId) {
