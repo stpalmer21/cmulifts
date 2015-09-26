@@ -1,7 +1,11 @@
 function displayUser(user) {
   $('span#name').text(user.name);
   $('span#name').data('id', user.id);
+  $('span#gender').text(user.gender);
+  $('span#experience').text(user.experience);
   $('img#profile-image').prop('src', user.picture);
+  $('span#workoutType').text(user.workoutType);
+  $('span#workoutTime').text(user.workoutTime);
 }
 
 $(document).ready(function () {

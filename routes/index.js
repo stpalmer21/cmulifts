@@ -27,7 +27,10 @@ function browsePage(req, res, next) {
     }
 
     var filteredUsers = users.filter(function (user) {
-      return user.id !== req.session.userId;
+      var isSomeoneElse = user.id !== req.session.userId;
+      var partnerAcceptsGender = user.partnerGender === 'Any' || user.partnerGender === req.user.gender;
+      var youAcceptGender = req.user.partnerGender === 'Any' || req.user.partnerGender === user.gender;
+      return isSomeoneElse && partnerAcceptsGender && youAcceptGender;
     });
     //TODO: remove those who have rejected you
     //TODO: sort with those who accepted you at start
