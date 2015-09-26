@@ -17,7 +17,7 @@ block content
     - else
       p.lead#waiting Please wait...
 
-    a.btn.btn-info.pull-left Stop searching
+    a.btn.btn-info.pull-left(href="/exitQueue") Stop searching
 
     script var users = !{JSON.stringify(users)};
     script(src="/javascripts/browse.js", type="text/javascript")

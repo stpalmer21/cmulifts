@@ -84,4 +84,20 @@ router.post('/', function (req, res, next) {
   });
 });
 
+router.get('/exitQueue',  function (req, res, next) {
+  if (!req.session.loggedIn) {
+    return res.redirect('/');
+  }
+
+  req.user.active = false;
+  req.user.save(function (err) {
+    if (err) {
+      console.error(err);
+      return res.send(500);
+    }
+    // Redirect pack to the home page (the search page)
+    res.redirect('/');
+  });
+});
+
 module.exports = router;
