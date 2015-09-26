@@ -88,8 +88,10 @@ function browsePage(req, res, next) {
         var canRespond = !alreadyResponded && !rejectedYou;
 
         var workoutsMatch = req.user.workoutType === 'Any' || user.workoutType === 'Any' || req.user.workoutType === user.workoutType;
+        var experiencesMatch = req.user.experience === user.experience;
+        var workoutTimesMatch = req.user.workoutTime === 'Any' || user.workoutTime === 'Any' || req.user.workoutTime === user.workoutTime;
 
-        return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond && workoutsMatch;
+        return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond && workoutsMatch && experiencesMatch && workoutTime;
       });
       //TODO: sort with those who accepted you at start
       //TODO: better sorting based on criteria including gender, etc.

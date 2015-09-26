@@ -46,7 +46,7 @@ var userSchema = mongoose.Schema({
   },
   workoutTime: {
     type: String,
-    enum: ['Now', 'In fifteen minutes', 'In half an hour', 'In an hour', 'In a couple of hours']
+    enum: ['Any', 'Now', 'In fifteen minutes', 'In half an hour', 'In an hour', 'In a couple of hours']
   }
 });
 
