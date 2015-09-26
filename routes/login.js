@@ -3,16 +3,16 @@ var router = express.Router();
 
 /* GET login page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'CMU Lifts' });
-});
-
-router.post('/loginuser', function(req, res) {
-    //res.render('login', { title: "Welcome"});
-
-
-    console.log(req.body);
-    res.redirect('../')
+  res.render('login', {
+    title: 'CMU Lifts',
+    loggedIn: true
+  });
 });
 
 
 module.exports = router;
+
+//
+// router.post('/', function(req, res, next) {
+//     res.redirect('/')
+// });
