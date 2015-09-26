@@ -91,7 +91,7 @@ function browsePage(req, res, next) {
         var experiencesMatch = req.user.experience === user.experience;
         var workoutTimesMatch = req.user.workoutTime === 'Any' || user.workoutTime === 'Any' || req.user.workoutTime === user.workoutTime;
 
-        return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond && workoutsMatch && experiencesMatch && workoutTime;
+        return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond && workoutsMatch && experiencesMatch && workoutTimesMatch;
       });
       //TODO: sort with those who accepted you at start
       //TODO: better sorting based on criteria including gender, etc.
