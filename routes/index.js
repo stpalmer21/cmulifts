@@ -77,24 +77,18 @@ function browsePage(req, res, next) {
     }
 
     getReferencingResponses(req.user.id, res, function (responses) {
-    console.log(responses);
       var filteredUsers = users.filter(function (user) {
         var isSomeoneElse = user.id !== req.session.userId;
         var partnerAcceptsGender = user.partnerGender === 'Any' || user.partnerGender === req.user.gender;
         var youAcceptGender = req.user.partnerGender === 'Any' || req.user.partnerGender === user.gender;
 
-        console.log('\nUser: ', user.id);
         var alreadyResponded = responses.accepted.contains(user.id) || responses.rejected.contains(user.id);
         var rejectedYou = responses.rejectedBy.contains(req.user.id);
         var acceptedYou = responses.acceptedBy.contains(req.user.id);
-        console.log('alreadyResponded', alreadyResponded);
-        console.log('rejectedYou', rejectedYou);
-        console.log('acceptedYou', acceptedYou);
         var canRespond = !alreadyResponded && !rejectedYou;
 
         return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond;
       });
-      //TODO: remove those who have rejected you
       //TODO: sort with those who accepted you at start
       //TODO: better sorting based on criteria including gender, etc.
 
