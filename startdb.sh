@@ -1,6 +1,6 @@
 killall mongod
-mkdir -p log
-mkdir -p data/db
-rm -rf data/db/*
-mongod --dbpath data/db --fork --logpath log/mongodb.log
+mkdir -p mongodb/log
+mkdir -p mongodb/data
+rm -rf mongodb/data/*
+mongod --config mongodb.conf
 node setup.js
