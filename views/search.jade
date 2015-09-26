@@ -8,14 +8,14 @@ block content
       fieldset
         legend First, let's find out more who you're looking for!
         .form-group
-          label.col-lg-2.control-label(for='gender') Their gender
+          label.col-lg-2.control-label(for='partnerGender') Their gender
           .col-lg-10
-            select#select.form-control(name="gender", required)
+            select#select.form-control(name="partnerGender", required)
               option(disabled selected) Select an option
+              option(selected=(user.partnerGender === "Any")) Any
               option(selected=(user.partnerGender === "Female")) Female
               option(selected=(user.partnerGender === "Male")) Male
               option(selected=(user.partnerGender === "Other")) Other
-              option(selected=(user.partnerGender === "Any")) Any
         legend Now, more about you.
         .form-group
           label.col-lg-2.control-label(for='experience') How experienced are you?
