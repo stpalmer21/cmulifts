@@ -9,9 +9,11 @@ block content
       p Users will call you if they accept you back. You can go back over anybody you skipped or find people who just joined the queue by clicking "Refresh". If you don't want to wait, you can edit your query.
 
       br
-      a.btn.btn-info.pull-left(href="/exitQueue") Cancel/Modify Search
-      a.btn.btn-primary.pull-right(href="/") Search Again
-        i.icon-refresh
+      a.btn.btn-info.pull-left(href="/exitQueue")
+        i.glyphicon.glyphicon-backward&nbsp;
+        span Cancel/Modify Search
+      a.btn.btn-primary.pull-right(href="/") Search Again 
+        i.glyphicon.glyphicon-refresh
 
     #user.hidden
       p.lead Let's find your perfect workout partner!
@@ -37,7 +39,9 @@ block content
             b Time: 
             span#workoutTime
       br
-      a.btn.btn-default.pull-left(href="/exitQueue") &laquo; Back
+      a.btn.btn-default.pull-left(href="/exitQueue")
+        i.glyphicon.glyphicon-backward&nbsp;
+        span Back
       .btn-group.pull-right
         button.btn.btn-danger#reject.btn Reject
         button.btn.btn-info#skip.btn Skip
