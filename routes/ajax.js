@@ -15,7 +15,7 @@ function findResponses(response, res, cb) {
 
 function saveResponse(affirmative, req, res) {
   var response = new Response({
-    from: req.session.id,
+    from: req.session.userId,
     to: req.params.toId,
     affirmative: affirmative
   });
@@ -32,7 +32,7 @@ function saveResponse(affirmative, req, res) {
 
     findResponses({
       from: req.params.toId,
-      to: req.session.id,
+      to: req.session.userId,
       affirmative: true
     }, res, function (responses) {
       res.send({
@@ -44,13 +44,13 @@ function saveResponse(affirmative, req, res) {
 
 function removeResponse(req, res) {
   var response = new Response({
-    from: req.session.id,
+    from: req.session.userId,
     to: req.params.toId
   });
 
   findResponses({
     from: req.params.toId,
-    to: req.session.id,
+    to: req.session.userId,
     affirmative: true
   }, res, function (responses) {
     for (var i in responses) {
