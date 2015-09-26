@@ -85,12 +85,12 @@ function browsePage(req, res, next) {
         var alreadyResponded = responses.accepted.contains(user.id) || responses.rejected.contains(user.id);
         var rejectedYou = responses.rejectedBy.contains(user.id);
         var acceptedYou = responses.acceptedBy.contains(user.id);
-        var canRespond = !alreadyResponded && !rejectedYou;
+        var canRespond = true;//!alreadyResponded && !rejectedYou;
 
         var workoutsMatch = req.user.workoutType === 'Any' || user.workoutType === 'Any' || req.user.workoutType === user.workoutType;
         var experiencesMatch = req.user.experience === user.experience;
         var workoutTimesMatch = req.user.workoutTime === 'Any' || user.workoutTime === 'Any' || req.user.workoutTime === user.workoutTime;
-
+        console.log(user.name, isSomeoneElse, partnerAcceptsGender, youAcceptGender, canRespond, workoutsMatch, experiencesMatch, workoutTimesMatch);
         return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond && workoutsMatch && experiencesMatch && workoutTimesMatch;
       });
 
