@@ -5,7 +5,9 @@ block content
     .well.bs-component
       form.form-horizontal(action='/login', method='POST')
         fieldset
-          legend Login Into CMU Lifts
+          legend Login to CMU Lifts
+          if notFound
+            h4 User not found!
           .form-group
             label.col-lg-2.control-label(for='userId') Andrew ID
             .col-lg-10
