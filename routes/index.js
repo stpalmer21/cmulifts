@@ -24,6 +24,8 @@ router.post('/', function(req, res, next) {
     req.user.experience = req.body['experience'];
     req.user.workoutType = req.body['workoutType'];
     req.user.workoutTime = req.body['workoutTime'];
+    req.user.searchTime = Date.now();
+    req.user.active = true;
 
     req.user.save(function(err) {
       if(err) {

@@ -33,7 +33,7 @@ var userSchema = mongoose.Schema({
     enum: ['Male', 'Female', 'Other'],
     required: true
   },
-  search_time: {
+  searchTime: {
     type: Date
   },
   partnerGender: {
