@@ -80,7 +80,7 @@ router.post('/', function (req, res, next) {
   req.user.save(function (err) {
     if (err) {
       console.error(err);
-      return res.send(500);
+      return res.sendStatus(500);
     }
     // Redirect pack to the home page (which will now be the browse page)
     res.redirect('/');

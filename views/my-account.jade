@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  .container
+    h1 
+      | My Heart is in the
+      b  Workout
+    .well.bs-component
+      form.form-horizontal
+        fieldset
+          legend My Account
+          .form-group
+            span#userId
+            .col-lg-10
+          .form-group
+            label.col-lg-2.control-label(for='age') Age
+            .col-lg-10
+              input#inputPassword.form-control(type='text', placeholder = age)
+          .form-group
+            label.col-lg-2.control-label(for='gender') Gender
+            .col-lg-10
+              select#select.form-control
+                option Female
+                option Male
+                option Other
+          .form-group
+            .col-lg-2.col-lg-offset-10.col-xs-4.col-xs-offset-8
+              button.btn.btn-primary(type='submit') Update Info

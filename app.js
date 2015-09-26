@@ -12,6 +12,7 @@ var users = require('./routes/users');
 var login = require('./routes/login');
 var logout = require('./routes/logout');
 var signup = require('./routes/sign-up');
+var myaccount = require('./routes/my-account');
 
 var db = require('./database');
 var User = db.schemas.User;
@@ -73,6 +74,7 @@ app.use('/users', users);
 app.use('/login', login);
 app.use('/logout', logout);
 app.use('/sign-up', signup);
+app.use('/my-account', myaccount);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

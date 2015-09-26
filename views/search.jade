@@ -38,7 +38,7 @@ block content
           .col-lg-10
             select#select.form-control(name="workoutTime", required)
               option(disabled selected) Select an option
-              option(selected=(user.workoutTime === "Now!")) Now!
+              option(selected=(user.workoutTime === "Now")) Now
               option(selected=(user.workoutTime === "In fifteen minutes")) In fifteen minutes
               option(selected=(user.workoutTime === "In half an hour")) In half an hour
               option(selected=(user.workoutTime === "In an hour")) In an hour
