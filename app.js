@@ -40,7 +40,7 @@ app.use(function(req, res, next) {
     User.find({id: req.session.userId}, function(err, users) {
       if(err) {
         console.log(err);
-        res.send(500);
+        return res.send(500);
       }
 
       if(users.length === 0) {

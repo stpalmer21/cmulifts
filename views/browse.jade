@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  .container
+    p.lead Hey, #{user['name']}! Let's find your perfect workout partner.
+
+    - if(users.length > 0)
+      #user
+        h2 How about 
+          span#name
+          img.img-circle.profile-image#profile-image
+        button#reject.btn Reject
+        button#accept.btn Accept
+    - else
+      p.lead#waiting Please wait...
+
+    a.btn.btn-danger Stop searching for a partner.
+
+    script var users = !{JSON.stringify(users)};
+    script(src="/scripts/browse.js", type="text/javascript")
