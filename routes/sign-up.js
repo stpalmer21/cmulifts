@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('sign-up', {
     title: 'CMU Lifts',
     path: req.path,
-    loggedIn: false
+    loggedIn: req.session.loggedIn
   });
 });
 
