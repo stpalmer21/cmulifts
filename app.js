@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'WOOHO!' }));
 
 app.use(function(req, res, next) {
-  if(req.session.loggedIn) {
+  if(req.session.loggedIn && req.session.userId) {
     User.find({id: req.session.userId}, function(err, users) {
       if(err) {
         console.log(err);
