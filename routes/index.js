@@ -83,8 +83,8 @@ function browsePage(req, res, next) {
         var youAcceptGender = req.user.partnerGender === 'Any' || req.user.partnerGender === user.gender;
 
         var alreadyResponded = responses.accepted.contains(user.id) || responses.rejected.contains(user.id);
-        var rejectedYou = responses.rejectedBy.contains(req.user.id);
-        var acceptedYou = responses.acceptedBy.contains(req.user.id);
+        var rejectedYou = responses.rejectedBy.contains(user.id);
+        var acceptedYou = responses.acceptedBy.contains(user.id);
         var canRespond = !alreadyResponded && !rejectedYou;
 
         var workoutsMatch = req.user.workoutType === 'Any' || user.workoutType === 'Any' || req.user.workoutType === user.workoutType;
@@ -93,7 +93,15 @@ function browsePage(req, res, next) {
 
         return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond && workoutsMatch && experiencesMatch && workoutTimesMatch;
       });
-      //TODO: sort with those who accepted you at start
+
+      var acceptedYouUsers = filteredUsers.filter(function (user) {
+        return responses.acceptedBy.contains(user.id);
+      });
+      var didNotAcceptedYouUsers = filteredUsers.filter(function (user) {
+        return !responses.acceptedBy.contains(user.id);
+      });
+      filteredUsers = acceptedYouUsers.concat(didNotAcceptedYouUsers);
+
       //TODO: better sorting based on criteria including gender, etc.
 
       res.render('browse', {
