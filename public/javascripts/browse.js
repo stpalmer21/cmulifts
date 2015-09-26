@@ -10,11 +10,17 @@ function displayUser(user) {
 
 function showNextUser() {
   if (users.length > 0) {
+    $('#user').removeClass('hidden');
     displayUser(users[0]);
   }
   else {
     $('#user').fadeOut(500);
-    $('#waiting').delay(500).fadeIn(500);
+    if($('#user').hasClass('hidden')) {
+      $('#waiting').show();
+    }
+    else {
+      $('#waiting').delay(500).fadeIn(500);
+    }
   }
 }
 

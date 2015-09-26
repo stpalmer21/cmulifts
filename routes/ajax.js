@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../database');
 var Response = db.schemas.Response;
+var User = db.schemas.User;
 
 function findResponses(response, res, cb) {
   Response.find(response, function (err, responses) {
@@ -35,10 +36,24 @@ function saveResponse(affirmative, req, res) {
       to: req.session.userId,
       affirmative: true
     }, res, function (responses) {
-      res.send({
-        mutual: responses.length > 0,
-        phone: responses.length > 0 ? user.phone : undefined
-      });
+      if (responses.length > 0) {
+        User.find({id: req.params.toId}, function (err, users) {
+          if (err) {
+            console.error(err);
+            return res.send(500);
+          }
+
+          var user = users[0];
+          res.send({
+            mutual: true,
+            phone: user.phone
+          });
+        });
+      } else {
+        res.send({
+          mutual: false
+        });
+      }
     });
   });
 }
