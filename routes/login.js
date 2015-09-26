@@ -22,7 +22,7 @@ router.post('/', function(req, res, next) {
   // If anything is missing
   if (!req.body || !req.body.userId || req.body.password === '') {
     // Back to the login page
-    loginFailed();
+    return loginFailed();
   }
 
   // Find all users with this userId
