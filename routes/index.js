@@ -1,8 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
+Array.prototype.contains = function (obj) {
+  for (var i in this) {
+    var element = this[i];
+    if (element === obj) {
+      return true;
+    }
+  }
+  return false;
+};
+
 var db = require('../database');
 var User = db.schemas.User;
+var Response = db.schemas.Response;
 
 function searchPage(req, res, next) {
   return res.render('search', {
@@ -19,28 +30,80 @@ function homePage(req, res, next) {
   });
 }
 
-function browsePage(req, res, next) {
-  User.find({active: true}, function(err, users) {
+function getReferencingResponses(userId, res, cb) {
+  Response.find([{
+    from: userId
+  }, {
+    to: userId
+  }], function (err, responses) {
     if (err) {
       console.log(err);
       return res.send(500);
     }
 
-    var filteredUsers = users.filter(function (user) {
-      var isSomeoneElse = user.id !== req.session.userId;
-      var partnerAcceptsGender = user.partnerGender === 'Any' || user.partnerGender === req.user.gender;
-      var youAcceptGender = req.user.partnerGender === 'Any' || req.user.partnerGender === user.gender;
-      return isSomeoneElse && partnerAcceptsGender && youAcceptGender;
-    });
-    //TODO: remove those who have rejected you
-    //TODO: sort with those who accepted you at start
-    //TODO: better sorting based on criteria including gender, etc.
+    var obj = {
+      rejected: [],
+      accepted: [],
+      rejectedBy: [],
+      acceptedBy: []
+    };
 
-    res.render('browse', {
-      title: 'CMU Lifts',
-      loggedIn: req.session.loggedIn,
-      user: req.user,
-      users: filteredUsers
+    for (var i in responses) {
+      var response = responses[i];
+      if (response.from === userId) {
+        if (response.affirmative) {
+          obj.accepted.push(response.to);
+        } else {
+          obj.rejected.push(response.to);
+        }
+      } else {
+        if (response.affirmative) {
+          obj.acceptedBy.push(response.from);
+        } else {
+          obj.rejectedBy.push(response.from);
+        }
+      }
+    }
+
+    cb(obj);
+  });
+}
+
+function browsePage(req, res, next) {
+  User.find({active: true}, function (err, users) {
+    if (err) {
+      console.log(err);
+      return res.send(500);
+    }
+
+    getReferencingResponses(req.user.id, res, function (responses) {
+    console.log(responses);
+      var filteredUsers = users.filter(function (user) {
+        var isSomeoneElse = user.id !== req.session.userId;
+        var partnerAcceptsGender = user.partnerGender === 'Any' || user.partnerGender === req.user.gender;
+        var youAcceptGender = req.user.partnerGender === 'Any' || req.user.partnerGender === user.gender;
+
+        console.log('\nUser: ', user.id);
+        var alreadyResponded = responses.accepted.contains(user.id) || responses.rejected.contains(user.id);
+        var rejectedYou = responses.rejectedBy.contains(req.user.id);
+        var acceptedYou = responses.acceptedBy.contains(req.user.id);
+        console.log('alreadyResponded', alreadyResponded);
+        console.log('rejectedYou', rejectedYou);
+        console.log('acceptedYou', acceptedYou);
+        var canRespond = !alreadyResponded && !rejectedYou;
+
+        return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond;
+      });
+      //TODO: remove those who have rejected you
+      //TODO: sort with those who accepted you at start
+      //TODO: better sorting based on criteria including gender, etc.
+
+      res.render('browse', {
+        title: 'CMU Lifts',
+        loggedIn: req.session.loggedIn,
+        user: req.user,
+        users: filteredUsers
+      });
     });
   });
 }

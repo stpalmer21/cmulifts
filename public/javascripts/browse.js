@@ -37,6 +37,7 @@ $(document).ready(function () {
     users.shift();
     $.post('/ajax/accept/' + $('span#name').data('id'), function (data) {
       if (data['mutual'] === true) {
+        alert('its mutual!');
         //TODO: redirect to contact us page
       }
       else {
