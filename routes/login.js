@@ -3,12 +3,24 @@ var router = express.Router();
 
 /* GET login page. */
 router.get('/', function(req, res, next) {
+
   res.render('login', {
     title: 'CMU Lifts',
     loggedIn: true,
-    nope: req.session.id
+    loggedIn: req.session.loggedIn
   });
+
+  if(req.session.loggedIn) {
+    res.render('search', {
+      title: 'CMU Lifts',
+      loggedIn: req.session.loggedIn
+    });
+  }
+
 });
+
+
+
 
 router.post('/')
 

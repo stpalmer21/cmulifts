@@ -20,10 +20,22 @@ html
           a.navbar-brand(href='/') CMU Lifts
         #bs-example-navbar-collapse-2.collapse.navbar-collapse
           ul.nav.navbar-nav
-            li.active
-              a(href='/sign-up')
-                | Sign Up
-                span.sr-only (current)
-            li
-              a(href='/login') Login
+            - if(!loggedIn)
+              - if(path === '/sign-up')
+                li(class='active')
+                    a(href='/sign-up') Sign Up
+              - else
+                li
+                    a(href='/sign-up') Sign Up
+              - if(path === '/login')
+                li(class='active')
+                    a(href='/login') Login
+              - else
+                li
+                    a(href='/login') Login
+            - else
+              li
+                  a(href='/my-account') My Account
+              li
+                  a(href='/logout') Logout
     block content

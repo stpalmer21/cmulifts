@@ -5,7 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('sign-up', {
     title: 'CMU Lifts',
-    loggedIn: true
+    path: req.path,
+    loggedIn: req.session.loggedIn
   });
 });
 
