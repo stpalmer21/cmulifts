@@ -21,6 +21,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.disable('etag'); // Fixes bugs where it gives 304 on dynamic pages
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -35,27 +36,35 @@ app.use(session({
   secret: 'WOOHO!'
 }));
 
-app.use(function(req, res, next) {
-  if(req.session.loggedIn && req.session.userId) {
-    User.find({id: req.session.userId}, function(err, users) {
-      if(err) {
-        console.log(err);
-        return res.send(500);
-      }
-
-      if(users.length === 0) {
-        req.session.loggedIn = false;
-        res.redirect('/login');
-      }
-      else {
-        req.user = users[0];
-      }
-
-      next();
-    });
-  } else {
-    next();
+app.use(function (req, res, next) {
+  if (!req.session.loggedIn || !req.session.userId) {
+    return next();
   }
+
+  User.find({
+    id: req.session.userId
+  }, function (err, users) {
+    if (err) {
+      console.log(err);
+      return res.send(500);
+    }
+
+    // If we found the user in the database
+    if (users.length === 1) {
+      // Store there info in the req object
+      req.user = users[0];
+      next();
+    }
+
+    // Otherwise, they have bad login info
+    else {
+      // Fix the session
+      req.session.loggedIn = false;
+      delete req.session.userId;
+      // Send them to the login page
+      res.redirect('/login');
+    }
+  });
 });
 
 app.use('/', routes);
