@@ -1,3 +1,7 @@
 .profile-image {
   height: 100px;
 }
+
+.form-control {
+  -webkit-appearance: none;
+}
