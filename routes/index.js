@@ -5,7 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   res.render('index', {
     title: 'CMU Lifts',
-    loggedIn: true
+    loggedIn: true,
+    magic: req.session.magic
   });
 });
 
