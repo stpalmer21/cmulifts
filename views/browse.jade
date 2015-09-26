@@ -2,19 +2,22 @@ extends layout
 
 block content
   .container
-    p.lead Hey, #{user['name']}! Let's find your perfect workout partner.
+    p.lead Let's find your perfect workout partner!
 
     - if(users.length > 0)
       #user
-        h2 How about 
+        h3 How about 
           span#name
-          img.img-circle.profile-image#profile-image
-        button#reject.btn Reject
-        button#accept.btn Accept
+        div#profile-image-wrapper
+          img#profile-image
+      .btn-group.pull-right
+        button.btn.btn-danger#reject.btn Reject
+        button.btn.btn-info#skip.btn Skip
+        button.btn.btn-success#accept.btn Accept
     - else
       p.lead#waiting Please wait...
 
-    a.btn.btn-danger Stop searching for a partner.
+    a.btn.btn-info.pull-left Stop searching
 
     script var users = !{JSON.stringify(users)};
     script(src="/javascripts/browse.js", type="text/javascript")
