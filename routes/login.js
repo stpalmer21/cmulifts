@@ -6,7 +6,7 @@ var User = db.schemas.User;
 /* GET login page. */
 router.get('/', function(req, res, next) {
   res.render('login', {
-    title: 'CMU Lifts',
+    title: 'Login',
   });
 });
 
@@ -22,10 +22,10 @@ router.post('/', function(req, res, next) {
     if (users.length > 0) {
       req.session.userId = req.body.userId;
       req.session.loggedIn = true;
-      res.redirect('/search/');
+      res.redirect('/');
     } else {
       res.render('login', {
-        title: 'CMU Lifts',
+        title: 'Login',
         notFound: true,
       });
     }
