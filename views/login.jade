@@ -4,7 +4,7 @@ block content
   h1= title
   p Welcome to #{title}
 
-  form(name = "login", method = "post")
+  form(action "/loginuser" name = "login", method = "post")
     div.input
         span.label Login
         input(type = "text", name = "username")
@@ -12,4 +12,4 @@ block content
         span.label Password
         input(type = "text", name = "password")
     div.actions
-        input(type = "submit", value = "add")
+        input(type = "submit", value = "Login")
