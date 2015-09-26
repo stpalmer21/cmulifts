@@ -29,6 +29,11 @@ var userSchema = mongoose.Schema({
     enum: ['Male', 'Female', 'Other'],
     required: true
   },
+  phone: {
+    type: String,
+    required: true,
+    default: "11234567890"
+  },
   searchTime: {
     type: Date
   },

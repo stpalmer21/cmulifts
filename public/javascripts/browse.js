@@ -36,8 +36,9 @@ $(document).ready(function () {
   $('button#accept').click(function () {
     users.shift();
     $.post('/ajax/accept/' + $('span#name').data('id'), function (data) {
-      if (data['mutual'] === true) {
-        alert('its mutual!');
+      if (data.mutual === true) {
+        alert('Hey, that user accepted you, too! You will now be prompted to call them.');
+        window.location.href = 'tel://+' + data.phone;
         //TODO: redirect to contact us page
       }
       else {
