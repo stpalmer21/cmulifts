@@ -42,7 +42,7 @@ var userSchema = mongoose.Schema({
   },
   workoutType: {
     type: String,
-    enum: ['Running', 'Lifting', 'Bicycling']
+    enum: ['Running', 'Lifting', 'Bicycling', 'Any']
   },
   workoutTime: {
     type: String,

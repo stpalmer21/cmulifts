@@ -87,7 +87,9 @@ function browsePage(req, res, next) {
         var acceptedYou = responses.acceptedBy.contains(req.user.id);
         var canRespond = !alreadyResponded && !rejectedYou;
 
-        return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond;
+        var workoutsMatch = req.user.workoutType === 'Any' || user.workoutType === 'Any' || req.user.workoutType === user.workoutType;
+
+        return isSomeoneElse && partnerAcceptsGender && youAcceptGender && canRespond && workoutsMatch;
       });
       //TODO: sort with those who accepted you at start
       //TODO: better sorting based on criteria including gender, etc.
