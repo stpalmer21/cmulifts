@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var routes = require('./routes/index');
+var ajax = require('./routes/ajax');
 var users = require('./routes/users');
 var login = require('./routes/login');
 var signup = require('./routes/sign-up');
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'WOOHO!' }));
 
 app.use('/', routes);
+app.use('/ajax', ajax);
 app.use('/users', users);
 app.use('/login', login);
 app.use('/sign-up', signup);

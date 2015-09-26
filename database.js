@@ -35,7 +35,7 @@ var userSchema = mongoose.Schema({
   }
 });
 
-var yesSchema = mongoose.Schema({
+var responseSchema = mongoose.Schema({
   from: {
     type: String,
     required: true
@@ -43,15 +43,19 @@ var yesSchema = mongoose.Schema({
   to: {
     type: String,
     required: true
+  },
+  affirmative: {
+    type: Boolean,
+    required: true
   }
 });
 
 var User = mongoose.model('User', userSchema);
-var Yes = mongoose.model('Yes', yesSchema);
+var Response = mongoose.model('Response', responseSchema);
 
 db.schemas = {
   User: User,
-  Yes: Yes
+  Response: Response
 };
 
 module.exports = db;
