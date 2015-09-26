@@ -73,7 +73,7 @@ var users = [
   }
 ];
 
-for (var i = 0; i < 30; i++) {
+for (var i = 0; i < 50; i++) {
   users.push(generateUser());
 }
 
