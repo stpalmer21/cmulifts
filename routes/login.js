@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/', function(req, res, next) {
   User.find({
-    id: req.params.id
+    id: req.params.userId
   }, function (err, users) {
     if (err) {
       console.error();(err);
@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
     }
 
     if (users.length > 0) {
-      req.session.id = req.params.id;
+      req.session.userId = req.params.id;
       req.session.loggedIn = true;
       res.redirect('/search/');
     } else {
